@@ -1,5 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template
 import sqlite3
+import time
 
 app = Flask(__name__)
 
@@ -19,27 +20,13 @@ def init_db():
 
 @app.route('/')
 def home():
-    return "Hola!"
-
-@app.route('/products')
-def get_products():
     conn = sqlite3.connect('store.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM products')
     products = cursor.fetchall()
     conn.close()
     
-    # Форматируем данные для ответа
-    product_list = []
-    for product in products:
-        product_list.append({
-            "id": product[0],
-            "name": product[1],
-            "price": product[2],
-            "image": product[3]
-        })
-    
-    return jsonify(product_list)
+    return render_template('index.html', products=products, time=time.time())
 
 if __name__ == '__main__':
     init_db()  # Инициализация базы данных

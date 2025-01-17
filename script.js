@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/products')
+    fetch('/')
         .then(response => response.json())
         .then(products => {
             const productGrid = document.getElementById('product-grid');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const productDiv = document.createElement('div');
                 productDiv.classList.add('product');
                 productDiv.innerHTML = `
-                    <img src="${product[3]}" alt="${product[1]}">
+                    <img src="/356406742.webp" alt="${product[1]}">
                     <h3>${product[1]}</h3>
                     <p>Цена: ${product[2]}₴</p>
                 `;
